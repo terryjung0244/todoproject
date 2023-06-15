@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { TodoInput } from "./CreateTodo.interface";
 import { useDispatch } from "react-redux";
 import { createTodoAction } from "service/redux/action/todoAction";
+import { getNanoid } from "service/util/nanoid";
 
 const CreateTodo = () => {
   const dispatch = useDispatch();
@@ -10,18 +11,25 @@ const CreateTodo = () => {
     desc: "",
   });
 
+  // onChange
   const createInputTodo = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // const { title, desc } = inputCreateTodo;
-    // if (!title || !desc) {
-    //   alert("Create todo fill in the blank");
-    //   return; // return을 적지않으면, 아래로 진행된다.
-    // }
     setInputCreateTodo({ ...inputCreateTodo, [e.target.name]: e.target.value });
   };
 
+  // onClick
   const sendTodoData = (inputCreateTodo: TodoInput) => {
-    dispatch(createTodoAction(inputCreateTodo));
-    // setInputCreateTodo({ ...inputCreateTodo, title: "", desc: "" });
+    const { title, desc } = inputCreateTodo;
+    if (!title || !desc) {
+      alert("Create todo fill in the blanks");
+      return; // return을 적지않으면, 아래로 진행된다.
+    }
+    dispatch(
+      createTodoAction({
+        ...inputCreateTodo,
+        id: getNanoid(),
+      })
+    );
+    setInputCreateTodo({ ...inputCreateTodo, title: "", desc: "" });
   };
 
   return (
