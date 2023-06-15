@@ -1,9 +1,20 @@
 import React from "react";
 import "./ShowTodo.css";
-import { useAppSelector } from "service/store";
+import { useAppDispatch, useAppSelector } from "service/store";
+import { TodoType } from "service/model/todo";
+import { sendEachSelectedIdAction } from "service/redux/action/todoAction";
 
 const ShowTodo = () => {
+  const dispatch = useAppDispatch();
   const { todoList } = useAppSelector((state) => state.todoReducer);
+
+  const selectedIdCheckBox = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value);
+    const { value } = e.target;
+    if (value) {
+      dispatch(sendEachSelectedIdAction(value));
+    }
+  };
 
   return (
     <div>
@@ -16,11 +27,23 @@ const ShowTodo = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>A</td>
-            <td>B</td>
-            <td>C</td>
-          </tr>
+          {todoList.map((todo: TodoType) => {
+            return (
+              <tr key={todo.id}>
+                <td>
+                  <input
+                    type="checkbox"
+                    value={todo.id}
+                    checked={true}
+                    onChange={selectedIdCheckBox}
+                  />
+                  {todo.id}
+                </td>
+                <td>{todo.title}</td>
+                <td>{todo.desc}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
