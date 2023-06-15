@@ -18,7 +18,7 @@ export const todoReducer: Reducer<TodoReducerState, TodoActionsType> = (
     switch (action.type) {
       case CREATE_TODO:
         console.log(action.payload);
-        draft.todoList.push(action.payload);
+        draft.todoList.push(action.payload); // push data into todoList[]
         break;
       default:
         return state;
