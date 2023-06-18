@@ -6,7 +6,11 @@ import { sendEachSelectedIdAction } from "service/redux/action/todoAction";
 
 const ShowTodo = () => {
   const dispatch = useAppDispatch();
-  const { todoList } = useAppSelector((state) => state.todoReducer);
+  const { todoList, selectedIdList } = useAppSelector(
+    (state) => state.todoReducer
+  );
+
+  console.log(todoList);
 
   const selectedIdCheckBox = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
@@ -15,6 +19,8 @@ const ShowTodo = () => {
       dispatch(sendEachSelectedIdAction(value));
     }
   };
+
+  console.log(selectedIdList);
 
   return (
     <div>
@@ -34,7 +40,7 @@ const ShowTodo = () => {
                   <input
                     type="checkbox"
                     value={todo.id}
-                    checked={true}
+                    checked={selectedIdList.includes(todo.id)}
                     onChange={selectedIdCheckBox}
                   />
                   {todo.id}
