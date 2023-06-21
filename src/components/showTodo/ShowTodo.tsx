@@ -13,12 +13,19 @@ const ShowTodo = () => {
   // console.log(todoList);
   console.log(selectedIdList);
 
-  const selectedIdCheckBox = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const todoEachBox = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
     const { value } = e.target;
     if (value) {
       dispatch(sendEachSelectedIdAction(value));
     }
+  };
+
+  const todoAllCheckBox = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.checked); //true
+
+    const selectedAllId: string[] = todoList.map((todo: TodoType) => todo.id);
+    console.log(selectedAllId);
   };
 
   console.log(todoList);
@@ -28,7 +35,13 @@ const ShowTodo = () => {
       <table>
         <thead>
           <tr>
-            <th>check</th>
+            <th>
+              <input
+                type="checkbox"
+                checked={selectedIdList.length > 0 ? true : false}
+                onChange={todoAllCheckBox}
+              />
+            </th>
             <th>Title</th>
             <th>Description</th>
           </tr>
@@ -42,9 +55,8 @@ const ShowTodo = () => {
                     type="checkbox"
                     value={todo.id}
                     checked={selectedIdList.includes(todo.id)}
-                    onChange={selectedIdCheckBox}
+                    onChange={todoEachBox}
                   />
-                  {todo.id}
                 </td>
                 <td
                   style={{

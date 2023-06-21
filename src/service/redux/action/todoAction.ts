@@ -5,6 +5,7 @@ import {
   DeleteActionType,
   MarkAsDoneActionType,
   MarkAsNotDoneActionType,
+  SendAllSelectedIdActionType,
   SendEachSelectedIdActionType,
   UpdateActionType,
 } from "./todoAction.interface";
@@ -12,6 +13,7 @@ import {
 const {
   CREATE_TODO,
   SEND_EACH_SELECTED_ID,
+  SEND_ALL_SELECTED_ID,
   MARK_AS_DONE,
   MARK_AS_NOT_DONE,
   DELETE,
@@ -32,6 +34,15 @@ export const sendEachSelectedIdAction = (
 ): SendEachSelectedIdActionType => {
   return {
     type: SEND_EACH_SELECTED_ID,
+    payload: selectedId,
+  };
+};
+
+export const sendAllSelectedIdAction = (
+  selectedId: string
+): SendAllSelectedIdActionType => {
+  return {
+    type: SEND_ALL_SELECTED_ID,
     payload: selectedId,
   };
 };
@@ -57,9 +68,9 @@ export const deleteAction = (): DeleteActionType => {
   };
 };
 
-export const updateAction = (): UpdateActionType => {
+export const updateAction = (input: Partial<TodoType>): UpdateActionType => {
   return {
     type: UPDATE,
-    payload: null,
+    payload: input,
   };
 };

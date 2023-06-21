@@ -7,6 +7,7 @@ import {
   deleteAction,
   markAsDoneAction,
   markAsNotDoneAction,
+  updateAction,
 } from "service/redux/action/todoAction";
 import { useAppDispatch, useAppSelector } from "service/store";
 
@@ -34,9 +35,9 @@ const SelectTodo = () => {
     const { title, desc } = updateInput;
     if (!title || !desc) {
       alert("Type a new update ");
-    } else {
-      console.log("2");
+      return;
     }
+    dispatch(updateAction({ ...updateInput, id: selectedIdList[0] }));
   };
 
   const selectOption = (e: React.ChangeEvent<HTMLSelectElement>) => {

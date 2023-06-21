@@ -64,7 +64,16 @@ export const todoReducer: Reducer<TodoReducerState, TodoActionsType> = (
         break;
 
       case UPDATE:
-        console.log("1");
+        const { title, desc, id } = action.payload;
+        console.log(title, desc, id); // New Update Inputs
+        // index을 찾아서, 그 인덱스에 새로운 값을 넣어라.
+        const updateIndex: number = draft.todoList.findIndex(
+          (todo: TodoType) => todo.id === id
+        );
+        draft.todoList[updateIndex].title = title; //새로운값
+        draft.todoList[updateIndex].desc = desc; //todoList에 [0]번째에 새로운 desc값을 넣는다.
+        draft.selectedIdList = [];
+
         break;
 
       case DELETE:
@@ -73,15 +82,9 @@ export const todoReducer: Reducer<TodoReducerState, TodoActionsType> = (
             //선택한 id값의 index을 찾아라
             (todo: TodoType) => todo.id === id
           );
-
           if (index !== -1) {
             draft.todoList.splice(index, 1);
           }
-
-          // return {
-          //   ...state,
-          //   todoList: ??,
-          // };
         });
         draft.selectedIdList = [];
         break;
@@ -91,40 +94,3 @@ export const todoReducer: Reducer<TodoReducerState, TodoActionsType> = (
     }
   });
 };
-
-// const animal2 = [
-//   {
-//     name: "rabbit",
-//     age: 1,
-//   },
-//   {
-//     name: "tiger",
-//     age: 2,
-//   },
-//   {
-//     name: "cat",
-//     age: 3,
-//   },
-//   {
-//     name: "dog",
-//     age: 4,
-//   },
-// ];
-
-// let index = animal2.findIndex((el) => el.id === isAction.payload);
-// animal2.splice(index, 1);
-// console.log(animal2);
-
-// const newnewAnimal = animal2.filter((animal) => {
-//   return animal.name.includes("t");
-// });
-// console.log(newnewAnimal);
-
-// const newAnimal = animal2.map((animal, index) => {
-//   return {
-//     ...animal,
-//     id: `${index}_${animal.name}`,
-//   };
-// });
-
-// console.log(newAnimal);
