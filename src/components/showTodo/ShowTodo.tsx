@@ -10,7 +10,8 @@ const ShowTodo = () => {
     (state) => state.todoReducer
   );
 
-  console.log(todoList);
+  // console.log(todoList);
+  console.log(selectedIdList);
 
   const selectedIdCheckBox = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value);
@@ -20,7 +21,7 @@ const ShowTodo = () => {
     }
   };
 
-  console.log(selectedIdList);
+  console.log(todoList);
 
   return (
     <div>
@@ -45,8 +46,20 @@ const ShowTodo = () => {
                   />
                   {todo.id}
                 </td>
-                <td>{todo.title}</td>
-                <td>{todo.desc}</td>
+                <td
+                  style={{
+                    textDecoration: todo.isDone ? "line-through" : "unset",
+                  }}
+                >
+                  {todo.title}
+                </td>
+                <td
+                  style={{
+                    textDecoration: todo.isDone ? "line-through" : "unset",
+                  }}
+                >
+                  {todo.desc}
+                </td>
               </tr>
             );
           })}

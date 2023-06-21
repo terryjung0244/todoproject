@@ -27,6 +27,7 @@ const CreateTodo = () => {
       createTodoAction({
         ...inputCreateTodo,
         id: getNanoid(),
+        isDone: false,
       })
     );
     setInputCreateTodo({ ...inputCreateTodo, title: "", desc: "" });
