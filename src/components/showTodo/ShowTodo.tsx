@@ -2,7 +2,10 @@ import React from "react";
 import "./ShowTodo.css";
 import { useAppDispatch, useAppSelector } from "service/store";
 import { TodoType } from "service/model/todo";
-import { sendEachSelectedIdAction } from "service/redux/action/todoAction";
+import {
+  sendAllSelectedIdAction,
+  sendEachSelectedIdAction,
+} from "service/redux/action/todoAction";
 
 const ShowTodo = () => {
   const dispatch = useAppDispatch();
@@ -10,11 +13,7 @@ const ShowTodo = () => {
     (state) => state.todoReducer
   );
 
-  // console.log(todoList);
-  console.log(selectedIdList);
-
   const todoEachBox = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
     const { value } = e.target;
     if (value) {
       dispatch(sendEachSelectedIdAction(value));
@@ -22,10 +21,14 @@ const ShowTodo = () => {
   };
 
   const todoAllCheckBox = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.checked); //true
+    const { checked } = e.target; // true
 
-    const selectedAllId: string[] = todoList.map((todo: TodoType) => todo.id);
-    console.log(selectedAllId);
+    if (checked) {
+      const selectedAllId: string[] = todoList.map((todo: TodoType) => todo.id); //the values is made into an array
+      dispatch(sendAllSelectedIdAction(selectedAllId));
+    } else {
+      dispatch(sendAllSelectedIdAction([]));
+    }
   };
 
   console.log(todoList);

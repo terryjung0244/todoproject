@@ -24,7 +24,7 @@ export interface SendEachSelectedIdActionType {
 
 export interface SendAllSelectedIdActionType {
   type: typeof SEND_ALL_SELECTED_ID;
-  payload: string;
+  payload: string[];
 }
 
 export interface MarkAsDoneActionType {

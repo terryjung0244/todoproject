@@ -39,7 +39,7 @@ export const sendEachSelectedIdAction = (
 };
 
 export const sendAllSelectedIdAction = (
-  selectedId: string
+  selectedId: string[]
 ): SendAllSelectedIdActionType => {
   return {
     type: SEND_ALL_SELECTED_ID,

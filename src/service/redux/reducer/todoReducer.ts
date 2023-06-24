@@ -8,6 +8,7 @@ import { TodoType } from "service/model/todo";
 const {
   CREATE_TODO,
   SEND_EACH_SELECTED_ID,
+  SEND_ALL_SELECTED_ID,
   MARK_AS_DONE,
   MARK_AS_NOT_DONE,
   DELETE,
@@ -39,6 +40,10 @@ export const todoReducer: Reducer<TodoReducerState, TodoActionsType> = (
         } else {
           draft.selectedIdList.splice(indexResult, 1); //2개의 id가 들어가지 않게 splice을 사용해서 제거하는 메소드.
         }
+        break;
+
+      case SEND_ALL_SELECTED_ID:
+        draft.selectedIdList.push(action.payload);
         break;
 
       case MARK_AS_DONE:
