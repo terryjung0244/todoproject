@@ -24,3 +24,5 @@
 질문
 
 1. {something && <></>} or {something ? true : false} 차이
+2. checkbox을 클릭해도 전체 checked로 바뀌지 않는다.
+3. util에 getPositiveNumber 이해도.

@@ -21,17 +21,15 @@ const ShowTodo = () => {
   };
 
   const todoAllCheckBox = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { checked } = e.target; // true
+    const { checked } = e.target; // true면 체크가 된다.
 
     if (checked) {
-      const selectedAllId: string[] = todoList.map((todo: TodoType) => todo.id); //the values is made into an array
-      dispatch(sendAllSelectedIdAction(selectedAllId));
+      const todoIdList: string[] = todoList.map((todo: TodoType) => todo.id); //Every values is made into an array
+      dispatch(sendAllSelectedIdAction(todoIdList));
     } else {
       dispatch(sendAllSelectedIdAction([]));
     }
   };
-
-  console.log(todoList);
 
   return (
     <div>
@@ -41,9 +39,10 @@ const ShowTodo = () => {
             <th>
               <input
                 type="checkbox"
-                checked={selectedIdList.length > 0 ? true : false}
                 onChange={todoAllCheckBox}
+                checked={selectedIdList.length > 0 ? true : false}
               />
+              CheckBox
             </th>
             <th>Title</th>
             <th>Description</th>

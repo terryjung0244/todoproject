@@ -44,6 +44,7 @@ export const todoReducer: Reducer<TodoReducerState, TodoActionsType> = (
 
       case SEND_ALL_SELECTED_ID:
         draft.selectedIdList.push(action.payload);
+
         break;
 
       case MARK_AS_DONE:
